@@ -1,0 +1,49 @@
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
+    <h1 class="text-2xl font-bold mb-6 text-center">Create a New Story - Step 1</h1>
+    <p class="text-gray-600 mb-6 text-center">Tell us about the story you want to create!</p>
+
+    <form action="/create-story/generate" method="POST">
+        <!-- IMPORTANT: CSRF Token -->
+        <input type="hidden" name="_csrfToken" value="<%= csrfToken %>">
+
+        <div class="mb-4">
+            <label for="theme" class="block text-gray-700 text-sm font-bold mb-2">Story Theme:</label>
+            <textarea id="theme" name="theme" rows="3" required
+                      class="shadow appearance-none border <%= typeof errors !== 'undefined' && errors.theme ? 'border-red-500' : 'border-gray-300' %> rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="e.g., A brave knight rescues a lost puppy, A magical adventure in a candy land"><%= typeof formData !== 'undefined' && formData.theme ? formData.theme : '' %></textarea>
+            <% if (typeof errors !== 'undefined' && errors.theme) { %>
+                <p class="text-red-500 text-xs italic mt-1"><%= errors.theme %></p>
+            <% } %>
+        </div>
+
+        <div class="mb-4">
+            <label for="characters" class="block text-gray-700 text-sm font-bold mb-2">Main Characters:</label>
+            <textarea id="characters" name="characters" rows="3" required
+                      class="shadow appearance-none border <%= typeof errors !== 'undefined' && errors.characters ? 'border-red-500' : 'border-gray-300' %> rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="e.g., Sir Reginald the Brave, Sparky the puppy, Princess Lolly"><%= typeof formData !== 'undefined' && formData.characters ? formData.characters : '' %></textarea>
+             <% if (typeof errors !== 'undefined' && errors.characters) { %>
+                <p class="text-red-500 text-xs italic mt-1"><%= errors.characters %></p>
+            <% } %>
+        </div>
+
+        <div class="mb-6">
+            <label for="difficulty" class="block text-gray-700 text-sm font-bold mb-2">Reading Difficulty:</label>
+            <select id="difficulty" name="difficulty" required
+                    class="shadow appearance-none border <%= typeof errors !== 'undefined' && errors.difficulty ? 'border-red-500' : 'border-gray-300' %> rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
+                <option value="" disabled <%= typeof formData === 'undefined' || !formData.difficulty ? 'selected' : '' %>>Select Difficulty</option>
+                <option value="Easy" <%= typeof formData !== 'undefined' && formData.difficulty === 'Easy' ? 'selected' : '' %>>Easy</option>
+                <option value="Medium" <%= typeof formData !== 'undefined' && formData.difficulty === 'Medium' ? 'selected' : '' %>>Medium</option>
+                <option value="Hard" <%= typeof formData !== 'undefined' && formData.difficulty === 'Hard' ? 'selected' : '' %>>Hard</option>
+            </select>
+             <% if (typeof errors !== 'undefined' && errors.difficulty) { %>
+                <p class="text-red-500 text-xs italic mt-1"><%= errors.difficulty %></p>
+            <% } %>
+        </div>
+
+        <div class="flex items-center justify-center">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
+                Generate Story Draft
+            </button>
+        </div>
+    </form>
+</div>

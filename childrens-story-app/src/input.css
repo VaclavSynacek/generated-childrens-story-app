@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any custom base styles or components here if needed */
+body {
+    @apply text-gray-800;
+}
+
+/* Example: Style generated story content if not using prose plugin */
+/*
+.story-content p {
+    @apply mb-4;
+}
+*/

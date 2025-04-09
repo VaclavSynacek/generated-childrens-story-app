@@ -1,0 +1,31 @@
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
+    <h1 class="text-2xl font-bold mb-6 text-center">Login</h1>
+
+    <form action="/login" method="POST" id="login-form">
+        <!-- IMPORTANT: CSRF Token -->
+        <input type="hidden" name="_csrfToken" value="<%= csrfToken %>">
+
+        <div class="mb-4">
+            <label for="identifier" class="block text-gray-700 text-sm font-bold mb-2">Username or Email:</label>
+            <input type="text" id="identifier" name="identifier" required
+                   class="shadow appearance-none border <%= typeof errors !== 'undefined' && errors.form ? 'border-red-500' : 'border-gray-300' %> rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   value="<%= typeof formData !== 'undefined' && formData.identifier ? formData.identifier : '' %>">
+        </div>
+
+        <div class="mb-6">
+            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password:</label>
+            <input type="password" id="password" name="password" required
+                   class="shadow appearance-none border <%= typeof errors !== 'undefined' && errors.form ? 'border-red-500' : 'border-gray-300' %> rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">
+             <!-- General form error shown by messages partial -->
+        </div>
+
+        <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Sign In
+            </button>
+            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/register">
+                Need an account? Register
+            </a>
+        </div>
+    </form>
+</div>

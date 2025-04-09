@@ -1,0 +1,35 @@
+ <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-4 text-gray-800"><%= story.title %></h1>
+    <div class="text-gray-600 text-sm mb-4 border-b pb-3">
+        <span class="mr-4">By: <strong class="text-gray-700"><%= story.author_username || 'Unknown Author' %></strong></span>
+        <span class="mr-4">Difficulty: <strong class="text-gray-700"><%= story.difficulty %></strong></span>
+        <span>Created: <strong class="text-gray-700"><%= new Date(story.created_at).toLocaleDateString() %></strong></span>
+    </div>
+
+    <!-- Using prose class for basic typography styling if Tailwind Typography plugin is used -->
+    <!-- Otherwise, style paragraphs, etc., manually -->
+    <div class="prose prose-lg max-w-none mt-6 mb-6 text-gray-700 leading-relaxed">
+        <% story.content.split('\n').forEach(paragraph => { %>
+            <% if (paragraph.trim()) { %>
+                <p><%= paragraph %></p>
+            <% } %>
+        <% }); %>
+    </div>
+
+    <div class="flex justify-between items-center border-t pt-4 mt-6">
+         <span class="text-gray-800 font-medium">Votes: <span id="vote-count-<%= story.id %>"><%= voteCount %></span></span>
+         <% if (user) { %>
+            <button
+                class="vote-button <%= userVoted ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600' %> text-white font-bold py-2 px-4 rounded transition-colors duration-200"
+                data-story-id="<%= story.id %>"
+                <%= userVoted ? 'disabled' : '' %>
+                id="vote-btn-<%= story.id %>">
+                <%= userVoted ? 'Voted' : 'Vote Up' %>
+            </button>
+         <% } else { %>
+            <p class="text-sm"><a href="/login?returnTo=/story/<%= story.id %>" class="text-blue-600 hover:underline">Login</a> to vote!</p>
+         <% } %>
+    </div>
+</div>
+ <!-- Include vote.js specifically for pages with vote buttons -->
+<script src="/js/vote.js"></script>

@@ -1,0 +1,20 @@
+<header class="bg-blue-600 text-white p-4 shadow-md">
+    <nav class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold hover:text-blue-200">Story Time</a>
+        <div>
+            <% if (user) { %>
+                <span class="mr-4">Welcome, <%= user.username %>!</span>
+                <a href="/create-story/start" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mr-2 inline-block">Create Story</a>
+                <!-- Logout needs to be a POST request, best handled by a small form -->
+                <form action="/logout" method="POST" class="inline">
+                     <!-- IMPORTANT: Include CSRF token for POST -->
+                     <input type="hidden" name="_csrfToken" value="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
+                     <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Logout</button>
+                </form>
+            <% } else { %>
+                <a href="/register" class="hover:text-blue-200 mr-4">Register</a>
+                <a href="/login" class="bg-white text-blue-600 hover:bg-gray-200 font-bold py-2 px-4 rounded">Login</a>
+            <% } %>
+        </div>
+    </nav>
+</header>
