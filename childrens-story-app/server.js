@@ -1,4 +1,5 @@
 const express = require('express');
+const partials = require('express-partials');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const config = require('./src/config');
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 // View Engine Setup
 app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
+app.use(partials());
 
 // Pass config to app instance for access in middleware/routes if needed
 app.set('config', config);
