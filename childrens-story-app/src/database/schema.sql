@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
     salt TEXT NOT NULL,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 
 -- Stories Table
 CREATE TABLE IF NOT EXISTS stories (
@@ -21,8 +20,6 @@ CREATE TABLE IF NOT EXISTS stories (
     characters TEXT NOT NULL,
     FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL
 );
-CREATE INDEX IF NOT EXISTS idx_stories_author_id ON stories(author_id);
-CREATE INDEX IF NOT EXISTS idx_stories_created_at ON stories(created_at);
 
 -- Votes Table
 CREATE TABLE IF NOT EXISTS votes (
@@ -33,7 +30,6 @@ CREATE TABLE IF NOT EXISTS votes (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (story_id) REFERENCES stories(id) ON DELETE CASCADE
 );
-CREATE INDEX IF NOT EXISTS idx_votes_story_id ON votes(story_id);
 
 -- Enable foreign key support
 PRAGMA foreign_keys = ON;
