@@ -1,7 +1,7 @@
 const https = require('https');
 const config = require('../config');
 
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${config.geminiApiKey}`;
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${config.geminiApiKey}`;
 
 /**
  * Generates a story using the Gemini API.
