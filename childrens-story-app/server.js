@@ -17,7 +17,7 @@ const app = express();
 app.use((req, res, next) => {
     // This basic implementation relies on routes passing messages directly to render
     // or storing them in res.locals before a redirect (which might not always work reliably without better storage).
-    const flashMessages = req.cookies.flash || {}; // Example using a temporary cookie (needs setting on redirect)
+    const flashMessages = req.cookies?.flash || {}; // Example using a temporary cookie (needs setting on redirect)
     res.locals.success = flashMessages.success || [];
     res.locals.error = flashMessages.error || [];
     res.clearCookie('flash'); // Clear flash cookie after reading
